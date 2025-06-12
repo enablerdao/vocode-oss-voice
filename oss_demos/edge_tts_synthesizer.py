@@ -56,24 +56,38 @@ class EdgeTTSSynthesizer(BaseSynthesizer[EdgeTTSSynthesizerConfig]):
     ) -> SynthesisResult:
         """テキストから音声を生成"""
         
-        # Edge TTSコミュニケーターを作成
-        communicate = edge_tts.Communicate(
-            message.text,
-            self.voice,
-            rate=self.rate,
-            volume=self.volume,
-            pitch=self.pitch
-        )
-        
-        # 音声データを取得
-        audio_data = io.BytesIO()
-        
-        async for chunk in communicate.stream():
-            if chunk["type"] == "audio":
-                audio_data.write(chunk["data"])
-        
-        # バイトストリームを巻き戻し
-        audio_data.seek(0)
+        try:
+            # Edge TTSコミュニケーターを作成
+            communicate = edge_tts.Communicate(
+                message.text,
+                self.voice,
+                rate=self.rate,
+                volume=self.volume,
+                pitch=self.pitch
+            )
+            
+            # 音声データを取得
+            audio_data = io.BytesIO()
+            
+            async for chunk in communicate.stream():
+                if chunk["type"] == "audio":
+                    audio_data.write(chunk["data"])
+            
+            # データが取得できたか確認
+            if audio_data.tell() == 0:
+                raise Exception("No audio data received")
+            
+            # バイトストリームを巻き戻し
+            audio_data.seek(0)
+        except Exception as e:
+            print(f"Edge TTS error: {e}, falling back to simple synthesis")
+            # フォールバック処理
+            communicate = edge_tts.Communicate(message.text, self.voice)
+            audio_data = io.BytesIO()
+            async for chunk in communicate.stream():
+                if chunk["type"] == "audio":
+                    audio_data.write(chunk["data"])
+            audio_data.seek(0)
         
         # MP3からWAVに変換（VocodeはWAV形式を期待）
         audio_segment = AudioSegment.from_mp3(audio_data)
