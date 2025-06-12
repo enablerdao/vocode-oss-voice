@@ -65,6 +65,7 @@ python-dotenv = "^1.1.0"
 gtts = "^2.5.4"
 speechrecognition = "^3.14.3"
 pyaudio = "^0.2.14"
+edge-tts = "^7.0.2"
 
 [tool.poetry.group.lint.dependencies]
 black = "^24.4.2"

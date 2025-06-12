@@ -846,6 +846,28 @@ files = [
 ]
 
 [[package]]
+name = "edge-tts"
+version = "7.0.2"
+description = "Microsoft Edge's TTS"
+optional = false
+python-versions = ">=3.7"
+groups = ["main"]
+files = [
+    {file = "edge_tts-7.0.2-py3-none-any.whl", hash = "sha256:effc554c249f02bd5013f28cd1faa22802e0757b031a7759be5960084ccb8d76"},
+    {file = "edge_tts-7.0.2.tar.gz", hash = "sha256:1374f493c170e6fe432d04012061c279e518c495524fa51b1b9da7368cc6b21b"},
+]
+
+[package.dependencies]
+aiohttp = ">=3.8.0,<4.0.0"
+certifi = ">=2023.11.17"
+srt = ">=3.4.1,<4.0.0"
+tabulate = ">=0.4.4,<1.0.0"
+typing-extensions = ">=4.1.0,<5.0.0"
+
+[package.extras]
+dev = ["black", "isort", "mypy", "pylint", "types-tabulate"]
+
+[[package]]
 name = "elevenlabs"
 version = "1.6.1"
 description = ""
@@ -4224,6 +4246,17 @@ pymysql = ["pymysql"]
 sqlcipher = ["sqlcipher3_binary"]
 
 [[package]]
+name = "srt"
+version = "3.5.3"
+description = "A tiny library for parsing, modifying, and composing SRT files."
+optional = false
+python-versions = ">=2.7"
+groups = ["main"]
+files = [
+    {file = "srt-3.5.3.tar.gz", hash = "sha256:4884315043a4f0740fd1f878ed6caa376ac06d70e135f306a6dc44632eed0cc0"},
+]
+
+[[package]]
 name = "standard-aifc"
 version = "3.13.0"
 description = "Standard library aifc redistribution. \"dead battery\"."
@@ -4270,6 +4303,21 @@ anyio = ">=3.4.0,<5"
 
 [package.extras]
 full = ["httpx (>=0.22.0)", "itsdangerous", "jinja2", "python-multipart (>=0.0.7)", "pyyaml"]
+
+[[package]]
+name = "tabulate"
+version = "0.9.0"
+description = "Pretty-print tabular data"
+optional = false
+python-versions = ">=3.7"
+groups = ["main"]
+files = [
+    {file = "tabulate-0.9.0-py3-none-any.whl", hash = "sha256:024ca478df22e9340661486f85298cff5f6dcdba14f3813e8830015b9ed1948f"},
+    {file = "tabulate-0.9.0.tar.gz", hash = "sha256:0095b12bf5966de529c0feb1fa08671671b3368eec77d7ef7ab114be2c068b3c"},
+]
+
+[package.extras]
+widechars = ["wcwidth"]
 
 [[package]]
 name = "tenacity"
@@ -5203,4 +5251,4 @@ transcribers = ["google-cloud-speech"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<4.0"
-content-hash = "f851d4aa98a74e8bb815a5fa6f8885c27e3c93fbb909c9aa38f923baea125acb"
+content-hash = "4fbc0172dbeb334e62ca29e34ad5c59e75565807579ae341025ed57e72f4a613"
